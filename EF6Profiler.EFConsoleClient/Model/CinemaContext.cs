@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Interception;
 using EF6Profiler.ProfileLogger;
+using EF6Profiler.ProfileLogger.Formatters;
 
 namespace EF6Profiler.EFConsoleClient.Model
 {
@@ -12,12 +14,26 @@ namespace EF6Profiler.EFConsoleClient.Model
 
         public CinemaContext() : base() { }
 
-        public CinemaContext(IProfileLogger logger) : base()
+        public CinemaContext(IProfileLogger logger)
+            : base()
         {
-            if (logger!=null)
+            if (logger != null)
             {
                 Database.Log = logger.Log;
+                DbInterception.Add(new NLogCommandInterceptor());
             }
         }
     }
+
+
+    //public class CinemaDbConfiguration : DbConfiguration
+    //{
+    //    public CinemaDbConfiguration()
+    //    {
+    //        SetDatabaseLogFormatter(
+    //            (context, writeAction) => new OneLineFormatter(context, writeAction));
+    //    }
+    //}
+
+
 }
