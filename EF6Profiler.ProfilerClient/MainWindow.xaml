@@ -2,77 +2,76 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="850" Width="1025" Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="22"></RowDefinition>            
-            <RowDefinition></RowDefinition>            
-        </Grid.RowDefinitions>
-
-        <Menu Grid.Row="0" IsMainMenu="True">
-            <MenuItem Header="_File">
-                <MenuItem Header="Stop" Command="{Binding StopCommand}" Visibility="{Binding StopVisibility}"></MenuItem>
-                <MenuItem Header="Start" Command="{Binding StartCommand}" Visibility="{Binding StartVisibility}"></MenuItem>
-                <MenuItem Header="Clear" Command="{Binding ClearCommand}"></MenuItem>
-            </MenuItem>
-
-        </Menu>
-        <ScrollViewer Grid.Row="1">
-            <DockPanel LastChildFill="True">
-                <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">
-                    <StackPanel Orientation="Horizontal" Height="300">
-                        <TextBox TextWrapping="Wrap" Margin="0,0,10,0" Text="{Binding SelectedItem.CommandText, Mode=OneWay}" IsReadOnly="True" Width="650"></TextBox>
-                        <StackPanel>
-                            <Grid Width="Auto" HorizontalAlignment="Left">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="15"></RowDefinition>
-                                    <RowDefinition Height="15"></RowDefinition>
-                                    <RowDefinition Height="15"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition Width="5"></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Start"></TextBlock>
-                                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding SelectedItem.Start}" HorizontalAlignment="Left"></TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="End"></TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding SelectedItem.End}"></TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Elapsed Time"></TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding SelectedItem.ElapsedString}"></TextBlock>
-                            </Grid>
-                            <TextBlock Text="Parameters"></TextBlock>
-                            <DataGrid 
-                                DockPanel.Dock="Top"
-                          ItemsSource="{Binding SelectedItem.Parameters}"
-                          AutoGenerateColumns="True"
-                          CanUserAddRows="False">
-
-                            </DataGrid>
-                        </StackPanel>
-                    </StackPanel>
-                </ScrollViewer>
-                <DataGrid
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="22"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="400"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Menu Grid.Row="0" IsMainMenu="True">
+                <MenuItem Header="_File">
+                    <MenuItem Header="Stop" Command="{Binding StopCommand}" Visibility="{Binding StopVisibility}"></MenuItem>
+                    <MenuItem Header="Start" Command="{Binding StartCommand}" Visibility="{Binding StartVisibility}"></MenuItem>
+                    <MenuItem Header="Clear" Command="{Binding ClearCommand}"></MenuItem>
+                </MenuItem>
+            </Menu>
+            <DataGrid
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+             Grid.Row="1"
               ItemsSource="{Binding CommandProfiles}"
               AutoGenerateColumns="False"
               CanUserAddRows="False"
               SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Duration" Binding="{Binding ElapsedString, Mode=OneWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Command" Binding="{Binding ShortCommandText, Mode=OneWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Type" Binding="{Binding CommandType, Mode=OneWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Times Executed" Binding="{Binding Count, Mode=OneWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Async" Binding="{Binding Async, Mode=OneWay}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Failed" Binding="{Binding Failed, Mode=OneWay}"></DataGridTextColumn>
-                    </DataGrid.Columns>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Duration" Binding="{Binding ElapsedString, Mode=OneWay}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Command" Binding="{Binding ShortCommandText, Mode=OneWay}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Type" Binding="{Binding CommandType, Mode=OneWay}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Times Executed" Binding="{Binding Count, Mode=OneWay}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Async" Binding="{Binding Async, Mode=OneWay}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Failed" Binding="{Binding Failed, Mode=OneWay}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GridSplitter Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1" ResizeDirection="Rows" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="5"/>
+
+            <TextBox Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Margin="0,0,10,0" Text="{Binding SelectedItem.CommandText, Mode=OneWay}" IsReadOnly="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></TextBox>
+
+            <GridSplitter Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Right" ResizeDirection="Columns" Width="5"/>
+            <StackPanel Grid.Row="2" Grid.Column="1">
+                <Grid Width="Auto" HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"></RowDefinition>
+                        <RowDefinition Height="15"></RowDefinition>
+                        <RowDefinition Height="15"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="5"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Start"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding SelectedItem.Start}" HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="End"></TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding SelectedItem.End}"></TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Elapsed Time"></TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding SelectedItem.ElapsedString}"></TextBlock>
+                </Grid>
+                <TextBlock Text="Parameters"></TextBlock>
+                <DataGrid 
+                                DockPanel.Dock="Top"
+                          ItemsSource="{Binding SelectedItem.Parameters}"
+                          AutoGenerateColumns="True"
+                          CanUserAddRows="False">
                 </DataGrid>
-
-
-            </DockPanel>
-
-
-        </ScrollViewer>
-
-    </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>
 
     
