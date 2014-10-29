@@ -11,15 +11,10 @@ namespace EF6Profiler.ProfileLogger.Loggers
         public SignalRLogger()
         {
             connection = new HubConnection("http://localhost:8374/");
-            hub = connection.CreateHubProxy("MyHub");
+            hub = connection.CreateHubProxy("ProfileHub");
             connection.Start().ContinueWith(task =>
             {
-                if (task.IsFaulted)
-                {
-                    Console.WriteLine("There was an error opening the connection:{0}",
-                                      task.Exception.GetBaseException());
-                }
-                else
+                if (!task.IsFaulted)
                 {
                     Console.WriteLine("Connected");
                 }

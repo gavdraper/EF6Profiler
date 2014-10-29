@@ -5,11 +5,10 @@ using Microsoft.AspNet.SignalR;
 
 namespace EF6Profiler.ProfilerClient
 {
-    public class MyHub : Hub
+    public class ProfileHub : Hub
     {
         public void LogProfile(CommandProfile cp)
         {
-            MessageBox.Show("Profile Received");
             Messenger.Default.Send(cp);
         }
     } 
