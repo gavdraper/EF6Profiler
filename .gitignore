@@ -4,6 +4,8 @@
 # User-specific files
 *.suo
 *.user
+*.ide
+*.jrs
 *.sln.docstates
 
 # Build results
