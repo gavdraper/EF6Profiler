@@ -2,12 +2,15 @@
 using System.Data.Common;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Diagnostics;
+using System.Linq;
 
 namespace EF6Profiler.ProfileLogger
 {
     public class CommandInterceptor : DbCommandInterceptor
     {
         private IProfileLogger logger;
+        //TODO : Would guess this will fail for async queries.        
+        private readonly Stopwatch stopwatch = new Stopwatch();
 
         public CommandInterceptor(IProfileLogger logger)
         {
@@ -18,34 +21,55 @@ namespace EF6Profiler.ProfileLogger
 
         public override void NonQueryExecuting(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)
         {
-            CommandExecuting(base.NonQueryExecuting, command, interceptionContext,CommandType.NonQuery);
+            base.NonQueryExecuted(command,interceptionContext);
+            stopwatch.Restart();            
         }
 
-        public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
+        public override void NonQueryExecuted(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)
         {
-            CommandExecuting(base.ReaderExecuting, command, interceptionContext,CommandType.Reader);
+            stopwatch.Stop();
+            LogCommand(stopwatch.Elapsed, command, interceptionContext, CommandType.NonQuery);
+            base.NonQueryExecuted(command, interceptionContext);
         }
 
         public override void ScalarExecuting(DbCommand command, DbCommandInterceptionContext<object> interceptionContext)
         {
-            CommandExecuting(base.ScalarExecuting, command, interceptionContext, CommandType.Scalar);
+            base.ScalarExecuting(command, interceptionContext);
+            stopwatch.Restart();
         }
 
-        private void CommandExecuting<T>(ExecutingMethod<T> executingMethod, DbCommand command, DbCommandInterceptionContext<T> interceptionContext,CommandType commandType)
+        public override void ScalarExecuted(DbCommand command, DbCommandInterceptionContext<object> interceptionContext)
         {
-            var sw = Stopwatch.StartNew();
-            executingMethod.Invoke(command, interceptionContext);
-            sw.Stop();
-            var endTime = DateTime.Now;
+            stopwatch.Stop();
+            LogCommand(stopwatch.Elapsed, command, interceptionContext, CommandType.Scalar);
+            base.ScalarExecuted(command, interceptionContext);
+        }
 
+        public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
+        {
+            base.ReaderExecuting(command,interceptionContext);
+            stopwatch.Restart();
+        }
+
+        public override void ReaderExecuted(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
+        {
+            stopwatch.Stop();
+            LogCommand(stopwatch.Elapsed, command, interceptionContext, CommandType.Reader);
+            base.ReaderExecuted(command, interceptionContext);
+        }
+
+        private void LogCommand<T>(TimeSpan ts, DbCommand command, DbCommandInterceptionContext<T> interceptionContext,CommandType commandType)
+        {
+            var endTime = DateTime.Now;
             var cp = new CommandProfile
             {
                 Async = interceptionContext.IsAsync,
                 CommandText = command.CommandText,
                 CommandType = commandType,
-                Elapsed = sw.Elapsed,
+                Elapsed = ts,
                 End = endTime,
-                Start = endTime.Subtract(sw.Elapsed),
+                Parameters = command.Parameters.Cast<DbParameter>().ToDictionary(dp => dp.ParameterName, dp => dp.Value.ToString()),
+                Start = endTime.Subtract(ts),
                 Exception = interceptionContext.Exception != null ? interceptionContext.Exception.Message : "",
                 Failed = interceptionContext.Exception != null
             };

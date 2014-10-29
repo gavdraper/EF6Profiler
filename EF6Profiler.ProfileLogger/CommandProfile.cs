@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EF6Profiler.ProfileLogger
 {
@@ -12,6 +13,6 @@ namespace EF6Profiler.ProfileLogger
         public bool Failed { get; set; }
         public string Exception { get; set; }
         public CommandType CommandType { get; set; }
-        
+        public Dictionary<string, string> Parameters { get; set; }
     }
 }

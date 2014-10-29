@@ -1,34 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Documents;
 using EF6Profiler.ProfileLogger;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.AspNet.SignalR.Messaging;
 using Microsoft.Owin.Hosting;
 
 namespace EF6Profiler.ProfilerClient
 {
-    public class MainViewModel
-    {
-        public ObservableCollection<CommandProfile> CommandProfiles { get; set; }
-    }
-
-
     public partial class MainWindow : Window
     {
         MainViewModel vm = new MainViewModel();
-        
 
         IDisposable MySignalR { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            vm.CommandProfiles = new ObservableCollection<CommandProfile>();
+            vm.CommandProfiles = new ObservableCollection<CommandProfileViewModel>();
             this.DataContext = vm;
-            
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -42,14 +30,14 @@ namespace EF6Profiler.ProfilerClient
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);                
+                MessageBox.Show(ex.Message);
             }
             Messenger.Default.Register<CommandProfile>(this, MessageReceived);
         }
 
         private void MessageReceived(CommandProfile cp)
         {
-            App.Current.Dispatcher.Invoke((Action)(() => vm.CommandProfiles.Add(cp)));
+            Application.Current.Dispatcher.Invoke(() => vm.AddProfile(new CommandProfileViewModel(cp)));
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

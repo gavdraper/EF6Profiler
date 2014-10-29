@@ -50,7 +50,6 @@ namespace EF6Profiler.ProfileLogger.Loggers
         {
             if (disposing)
             {
-                connection.Stop();
             }
         }
     }
