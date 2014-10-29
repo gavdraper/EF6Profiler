@@ -4,7 +4,7 @@ using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
-namespace EF6Profiler.ProfilerClient
+namespace EF6Profiler.ProfilerClient.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
@@ -13,6 +13,11 @@ namespace EF6Profiler.ProfilerClient
         private Visibility _startVisibiltiy;
         private bool _running;
         public ObservableCollection<CommandProfileViewModel> CommandProfiles { get; set; }
+
+        public MainViewModel()
+        {
+            Running = true;
+        }
 
         public bool Running
         {

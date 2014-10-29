@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using EF6Profiler.ProfileLogger;
 using GalaSoft.MvvmLight;
 
-namespace EF6Profiler.ProfilerClient
+namespace EF6Profiler.ProfilerClient.ViewModel
 {
     public class CommandProfileViewModel : ViewModelBase
     {

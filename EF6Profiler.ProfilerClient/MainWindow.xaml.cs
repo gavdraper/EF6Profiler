@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using EF6Profiler.ProfileLogger;
+using EF6Profiler.ProfilerClient.ViewModel;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Owin.Hosting;
 

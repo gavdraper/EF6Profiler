@@ -101,8 +101,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CommandProfileViewModel.cs" />
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="ViewModel\CommandProfileViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ProfileHub.cs" />
     <Compile Include="Startup.cs" />
     <Page Include="MainWindow.xaml">
