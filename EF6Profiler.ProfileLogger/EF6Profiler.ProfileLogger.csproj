@@ -62,7 +62,6 @@
     <Compile Include="IProfileLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Loggers\SignalRLogger.cs" />
-    <Compile Include="Loggers\TextFileLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

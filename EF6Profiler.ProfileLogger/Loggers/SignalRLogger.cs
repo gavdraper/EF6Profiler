@@ -16,7 +16,7 @@ namespace EF6Profiler.ProfileLogger.Loggers
             {
                 if (!task.IsFaulted)
                 {
-                    Console.WriteLine("Connected");
+                    //TODO Handle This
                 }
 
             }).Wait();

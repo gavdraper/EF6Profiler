@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22013.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF6Profiler.EFConsoleClient", "EF6Profiler.EFConsoleClient\EF6Profiler.EFConsoleClient.csproj", "{CFB91256-FD49-4271-852C-61B4D1CB3B28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF6Profiler.EFSample", "EF6Profiler.EFConsoleClient\EF6Profiler.EFSample.csproj", "{CFB91256-FD49-4271-852C-61B4D1CB3B28}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF6Profiler.ProfilerClient", "EF6Profiler.ProfilerClient\EF6Profiler.ProfilerClient.csproj", "{44AEFBFC-D193-4FC8-BD12-87BEB0CCBE1F}"
 EndProject
