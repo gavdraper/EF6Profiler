@@ -7,8 +7,8 @@
     <ProjectGuid>{CFB91256-FD49-4271-852C-61B4D1CB3B28}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EF6Profiler.EFConsoleClient</RootNamespace>
-    <AssemblyName>EF6Profiler.EFConsoleClient</AssemblyName>
+    <RootNamespace>EF6Profiler.EFSample</RootNamespace>
+    <AssemblyName>EF6Profiler.EFSample</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

@@ -2,11 +2,11 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
-using EF6Profiler.EFConsoleClient.Model;
+using EF6Profiler.EFSample.Model;
 using EF6Profiler.ProfileLogger;
 using EF6Profiler.ProfileLogger.Loggers;
 
-namespace EF6Profiler.EFConsoleClient
+namespace EF6Profiler.EFSample
 {
     class Program
     {

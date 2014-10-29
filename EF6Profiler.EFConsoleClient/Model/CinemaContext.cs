@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace EF6Profiler.EFConsoleClient.Model
+namespace EF6Profiler.EFSample.Model
 {
     public class CinemaContext : DbContext
     {

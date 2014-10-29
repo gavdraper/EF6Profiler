@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EF6Profiler.EFConsoleClient.Model
+namespace EF6Profiler.EFSample.Model
 {
     public class Film
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EF6Profiler.EFConsoleClient.Model
+namespace EF6Profiler.EFSample.Model
 {
     public class Review
     {
