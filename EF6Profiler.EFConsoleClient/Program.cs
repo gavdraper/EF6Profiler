@@ -10,7 +10,9 @@ namespace EF6Profiler.EFConsoleClient
     {
         static void Main(string[] args)
         {
-            IProfileLogger logger = new ConsoleLogger();
+            Console.WriteLine("PRess Enter To Start");
+            Console.ReadLine();
+            IProfileLogger logger = new SignalRLogger();
             var ctx = new CinemaContext(logger);
             var cinemas = ctx.Cinemas.ToList();
             Console.ReadLine();

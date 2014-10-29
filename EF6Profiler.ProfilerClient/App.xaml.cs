@@ -13,5 +13,6 @@ namespace EF6Profiler.ProfilerClient
     /// </summary>
     public partial class App : Application
     {
+   
     }
 }

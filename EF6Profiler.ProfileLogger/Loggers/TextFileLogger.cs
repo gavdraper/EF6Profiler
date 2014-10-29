@@ -4,7 +4,7 @@ namespace EF6Profiler.ProfileLogger.Loggers
 {
     public class TextFileLogger : IProfileLogger
     {
-        public void Log(string log)
+        public void Log(CommandProfile commandProfile)
         {
             throw new NotImplementedException();
         }

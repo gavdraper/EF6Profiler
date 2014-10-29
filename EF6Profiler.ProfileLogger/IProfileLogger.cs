@@ -2,6 +2,6 @@
 {
     public interface IProfileLogger
     {
-        void Log(string log);
+        void Log(CommandProfile commandProfile);
     }
 }
